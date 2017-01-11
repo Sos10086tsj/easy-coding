@@ -1,6 +1,9 @@
 @CHARSET "UTF-8";
-
-
+.error_message{
+	text-align:center;
+	color:red;
+	font-size:0.8em;
+}
 .tpl-login {
   width: 100%;
 }

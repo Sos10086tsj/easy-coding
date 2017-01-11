@@ -13,7 +13,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -106,7 +105,6 @@ public class SessionFilter implements Filter{
 		String uri = httpServletRequest.getServletPath();
 		PropertiesUtil pu = new PropertiesUtil(ApplicationConstant.APPLICATION_PROPERTY_FILE);
 		String loginUrl = pu.getProperty(ApplicationConstant.PROPERTY_SESSION_FILTER_LOGIN_URL);
-		String sessionOverdueUrl = pu.getProperty(ApplicationConstant.PROPERTY_SESSION_OVERDUE_URL);
 		
 		SessionContext.setContextRequest(httpServletRequest);
 		if (StringUtils.isNotEmpty(uri)) {
@@ -122,32 +120,26 @@ public class SessionFilter implements Filter{
 						chain.doFilter(request, response);
 					}else {
 						try {
-							String sessionId = SessionUtil.getSessionId();
-							HttpSession session = httpServletRequest.getSession();
-							if (!session.getId().equals(sessionId)) {
-								logger.info("session not exist of sessionId:{}.",sessionId);
-								request.getRequestDispatcher(sessionOverdueUrl).forward(request, response);
+							if (null == SessionUtil.getUserId()) {
+								request.getRequestDispatcher(loginUrl).forward(request, response);
 								return;
 							}
 						} catch (Exception e) {
 							logger.error("{}",e);
-							request.getRequestDispatcher(sessionOverdueUrl).forward(request, response);
+							request.getRequestDispatcher(loginUrl).forward(request, response);
 							return;
 						}
 						chain.doFilter(request, response);
 					}
 				}else {
 					try {
-						String sessionId = SessionUtil.getSessionId();
-						HttpSession session = httpServletRequest.getSession();
-						if (!session.getId().equals(sessionId)) {
-							logger.info("session not exist of sessionId:{}.",sessionId);
-							request.getRequestDispatcher(sessionOverdueUrl).forward(request, response);
+						if (null == SessionUtil.getUserId()) {
+							request.getRequestDispatcher(loginUrl).forward(request, response);
 							return;
 						}
 					} catch (Exception e) {
 						logger.error("{}",e);
-						request.getRequestDispatcher(sessionOverdueUrl).forward(request, response);
+						request.getRequestDispatcher(loginUrl).forward(request, response);
 						return;
 					}
 					chain.doFilter(request, response);

@@ -14,6 +14,7 @@ import com.chinesedreamer.easycoding.exception.user.UsernamePassNotMatchExceptio
 import com.chinesedreamer.easycoding.sys.user.service.UserService;
 import com.chinesedreamer.easycoding.util.EncryptionUtil;
 import com.chinesedreamer.easycoding.util.ErrorMessageUtil;
+import com.chinesedreamer.easycoding.util.SessionUtil;
 
 /**
  * Description:
@@ -36,6 +37,7 @@ public class UserServiceImpl implements UserService{
 			ErrorMessage errorMessage = ErrorMessageUtil.getErrorMessage(ErrorMessageCode.USER.CODE, ErrorMessageCode.USER.USERNAME_PASS_NOT_MATCH);
 			throw new UsernamePassNotMatchException(errorMessage);
 		}
+		SessionUtil.addUserId(user.getId());
 	}
 
 }
