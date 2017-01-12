@@ -1,8 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
-<%@include file="/WEB-INF/jsp/base/baselib.jspf"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<%@include file="/WEB-INF/jsp/base/baselib.jspf"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Easy Coding Login Page">
@@ -10,11 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<!-- <link rel="icon" type="image/png" href="assets/i/favicon.png"> 浏览器图标-->
 
 <link rel="stylesheet" href="${ctx }/resources/component/AmazeUI-2.7.2/css/amazeui.min.css?${version}" />
 <link rel="stylesheet" href="${ctx }/resources/component/AmazeUI-2.7.2/css/amazeui.datatables.min.css?${version}" />
-<link rel="stylesheet" href="${ctx }/resources/css/login.css?${version}" />
 <title>Easy Coding</title>
 </head>
 <body class="theme-white">
@@ -40,6 +38,9 @@
 <!-- 						</div> -->
 						<div class="am-form-group">
 							<button type="submit" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">提交</button>
+						</div>
+						<div class="am-form-group">
+							<a href="${ctx }/register" class="am-fr register_content">注册新用户</a>
 						</div>
 					</form>
 				</div>

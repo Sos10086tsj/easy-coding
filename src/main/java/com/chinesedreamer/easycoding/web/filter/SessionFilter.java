@@ -44,6 +44,7 @@ public class SessionFilter implements Filter{
 		}
 		return ignoreUris;
 	}
+	
 	private static List<String> whiteUris = new ArrayList<String>();
 	private static void initWhiteUris() {
 		PropertiesUtil pu = new PropertiesUtil(ApplicationConstant.APPLICATION_PROPERTY_FILE);
@@ -57,6 +58,27 @@ public class SessionFilter implements Filter{
 			initWhiteUris();
 		}
 		return whiteUris;
+	}
+	
+	private boolean isWhiteUri(String uri){
+		List<String> whiteList = getWhiteUris();
+		if (null == whiteList || whiteList.isEmpty() ) {
+			return false;
+		}else {
+			for (String wl : whiteList) {
+				if (uri.equals(wl)) {
+					return true;
+				}
+				if (wl.endsWith("*")) {
+					int index = wl.indexOf("*");
+					String patternUri = wl.substring(0, index);
+					if (uri.length() >= patternUri.length() && uri.substring(0, index).equals(patternUri)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 	
 	public static class SessionContext implements Serializable{
@@ -110,7 +132,7 @@ public class SessionFilter implements Filter{
 		if (StringUtils.isNotEmpty(uri)) {
 			if (uri.equals(loginUrl)) {
 				chain.doFilter(request, response);
-			}else if (getWhiteUris().contains(uri)) {
+			}else if (this.isWhiteUri(uri)) {
 				chain.doFilter(request, response);
 			}else {
 				int index = uri.lastIndexOf(".");

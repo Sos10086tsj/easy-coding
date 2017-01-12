@@ -9,4 +9,6 @@ import com.chinesedreamer.easycoding.exception.user.UserException;
 **/
 public interface UserService {
 	public void userLogin(String username, String password) throws UserException;
+	
+	public boolean exist(String username);
 }

@@ -40,4 +40,9 @@ public class UserServiceImpl implements UserService{
 		SessionUtil.addUserId(user.getId());
 	}
 
+	@Override
+	public boolean exist(String username) {
+		return null == this.userDao.findByUsername(username) ? false : true;
+	}
+
 }
