@@ -16,5 +16,6 @@ public class ApplicationConstant {
 	
 	public static class USER {
 		public static final int SALT_LENGTH = 6;
+		public static final int REGISTER_TOKEN_EXPIRE = 30;
 	}
 }

@@ -27,6 +27,7 @@
 				<div class="tpl-login-title">注册用户</div>
 				<span class="tpl-login-content-info">创建一个新的用户</span>
 				<form class="am-form tpl-form-line-form" id="register_form" method="post" action="${ctx }/register/apply">
+					<input type="hidden" name="duplicateToken" value="${duplicateToken }">
 					<div class="am-form-group">
 						<input type="text" class="tpl-form-input" name="company" placeholder="公司名称" required>
 					</div>
@@ -53,7 +54,7 @@
 						<label for="remember-me"> 我已阅读并同意 <a href="javascript:;">《用户注册协议》</a></label>
 					</div>
 					<div class="am-form-group">
-						<button id="register_btn" type="button" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn" disabled="disabled">注册</button>
+						<button id="register_btn" type="submit" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn" disabled="disabled">注册</button>
 					</div>
 				</form>
 			</div>

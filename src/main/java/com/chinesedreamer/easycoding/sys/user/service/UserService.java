@@ -11,4 +11,13 @@ public interface UserService {
 	public void userLogin(String username, String password) throws UserException;
 	
 	public boolean exist(String username);
+	
+	/**
+	 * 用户注册
+	 * @param username
+	 * @param password
+	 * @param company
+	 * @return 返回激活token
+	 */
+	public void saveRegister(String username,String password,String company);
 }

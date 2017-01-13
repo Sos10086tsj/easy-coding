@@ -65,6 +65,15 @@ public class RegisterController {
 			@RequestParam(value="company")String company,
 			Model model
 			){
-		return null;
+		//1. 检查用户名是否存在
+		boolean exist = this.userService.exist(username);
+		if (exist) {
+			model.addAttribute("exist", "1");
+		}else {//2. 发送激活链接
+			model.addAttribute("exist", "0");
+			this.userService.saveRegister(username, password, company);
+			model.addAttribute("email", username);
+		}
+		return "register/apply";
 	}
 }
