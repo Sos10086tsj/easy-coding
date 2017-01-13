@@ -41,7 +41,7 @@
 					</div>
 					<div class="am-form-group">
 						<div class="am-fr">
-							<img src="${ctx }/captcha" width="100px"/>
+							<img id="verifyImg" src="${ctx }/captcha" width="100px" onclick="register.verifyImgChange()"/>
 						</div>
 						<div class="verifyCode am-fr">
 							<input type="text" class="tpl-form-input am-fl ajax_verify_code" id="verifyCode" name="verifyCode" placeholder="验证码" required>

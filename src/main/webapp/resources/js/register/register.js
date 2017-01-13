@@ -100,6 +100,10 @@ var register = {
 			$('#remember-me_div').removeClass('am-form-success');
 			$(this).removeClass('am-field-valid');
 		}
+	},
+	
+	verifyImgChange : function(){
+		$('#verifyImg').hide().attr("src",ctx + '/captcha?' + Math.floor(Math.random()*100) ).fadeIn();
 	}
 }
 $(function () {
